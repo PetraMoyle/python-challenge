@@ -6,20 +6,19 @@ directory = os.path.dirname(__file__)
 import csv
 budget_data = os.path.join(directory,'Resources', 'budget_data.csv')
 
-# open/read the file
+# Open/read the file
 with open(budget_data) as csv_file:
 
     # CSV reader specifies delimiter and variable that holds contents
     csv_reader = csv.reader(csv_file, delimiter=',')
 
-    # Read & print the header row 
+    # Read & skip the header row 
     csv_header = next(csv_reader)
-    #print(f"CSV Header: {csv_header}")
 
-    #Variables
+    # Variables
     total_months = 1
 
-    #skipping the first row
+    # Skipping the first row
     first_row = next(csv_reader)
 
     total_net = int(first_row[1])    
@@ -28,62 +27,66 @@ with open(budget_data) as csv_file:
     the_greatest_increase = 0
     the_greatest_decrease = 0
 
-    #list
+    # Lists
     changes_list = []
+    month_list = []
 
-    # # Read each row of data after the header
+    # Read each row of data after the header
     for row in csv_reader:
-    #     #print(row)
 
-    #     # Append/hold the total months and total profit/loss
+         # Append/hold the total months and total profit/loss
          total_months = total_months + 1
          total_net = total_net + int(row[1])
          changes = int(row[1]) - profit_loss
+         month_list.append(row[0]) 
 
-         #reset profit loss
+         # Reset profit loss
          profit_loss = int(row[1])
 
-         #attach changes in a list 
+         # Attach changes in a list 
          changes_list.append(changes)
   
-
     # Calculate the average 
     average_change = round(sum(changes_list)/len(changes_list),2)
 
     # Calculating the greatest increase and the greatest decrease
-    the_greatest_increase = changes_list.index(max(changes_list)) 
-    the_greatest_decrease = changes_list.index(min(changes_list))
-        
-    # the_greatest_increase = max(changes_list)
-    # the_greatest_decrease = min(changes_list)
+    the_greatest_increase = (max(changes_list)) 
+    the_greatest_decrease = (min(changes_list))
 
-# print to the terminal 
-# print
+    max_month = month_list[changes_list.index(the_greatest_increase)] 
+    min_month = month_list[changes_list.index(the_greatest_decrease)]
 
-# print('----------------------------------------')
-# print("Total Months:" + " " + str(total_months))
-# print("Average Change:" + " " + "str($)" + "(average_change)")"
-# print("Greatest Increase in Profits:" + " " + "?month?" + "str($)" + (the_greatest_increase))
-# print("Greatest Decrease in Profits:" + " " + "?month?" + "str($)" + (the_greatest_decrease))
 
-# # Specify the file to write to
-# Analysis = os.path.join( "output", "analysis.csv")
+    # Prin to the Terminal 
+    print(" ")
+    print("Financial Analysis")
+    print('----------------------------------------')
+    print("Total Months:" + " " + str(total_months))
+    print("Total:" + " " + str(total_net))
+    print("Average Change:" + " " + "$" + str(average_change))
+    print("Greatest Increase in Profits:" + " " + max_month + " " + "(" + "$" + str(the_greatest_increase) + ")")
+    print("Greatest Decrease in Profits:" + " " + min_month + " " + "(" + "$" + str(the_greatest_decrease) + ")")
+    print('----------------------------------------')
+    print(" ")
 
-# # Open the file using "write" mode. Specify the variable to hold the contents
-#with open(Analysis, 'w') as csv_file:
 
-    #Initialize txt.writter
-    #csv_writter = csv.writer (csv_file, delimeter=',')
 
-    #Results exported to the text file 
-    # cvs_writter.writerow("Financial Analysis\n")
-    # cvs_writter.writerow("-------------------------------------------------------\n")
-    # cvs_writter.writerow("Total months" + ":" + "" + str(len(total_months)))
-    # cvs_writter.writerow("\n")
-    # cvs_writter.writerow("Average Change:" + " " + "str($)" + str(average_change))
-    # cvs_writter.writerow("\n")
-    # cvs_writter.writerow("Greatest Increase in Profits" + ":" + " " + "str($)" + ?month + ?str(the_greatest_increase))
-    # cvs_writter.writerow("\n")
-    # cvs_writter.writerow("Greatest Decrease in Profits" + ":" + " " + "str($)" + ?month + ?str(the_greatest_decrease))
-    # cvs_writter.writerow("\n")
+# Specify the file to write to
+Analysis = os.path.join("Resources", "analysis.txt")
+
+# Open the file using "write" mode. Specify the variable to hold the contents
+with open(Analysis, 'w') as txt_writer:
+
+    # txt_writter = txt_writer (txt_file, delimeter=',')
+
+    txt_writer.write(["Financial Analysis"])
+    txt_writer.write("-------------------------------------------------------\n")
+    txt_writer.write("Total months" + ":" + "" + str(len(total_months)))
+    txt_writer.write("\n")
+    txt_writer.write("Average Change:" + " " + "$" + str(average_change))
+    txt_writer.write("\n")
+    txt_writer.write("Greatest Increase in Profits" + ":" + " " + "$" + max_month + str(the_greatest_increase))
+    txt_writer.write("\n")
+    txt_writer.write("Greatest Decrease in Profits" + ":" + " " + "$" + min_month + str(the_greatest_decrease))
+    txt_writer.write("\n")
    
