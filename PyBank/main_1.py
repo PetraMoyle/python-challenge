@@ -53,8 +53,8 @@ with open(budget_data) as csv_file:
     average_change = round(sum(changes_list)/len(changes_list),2)
 
     # Calculating the greatest increase and the greatest decrease
-    the_greatest_increase = changes_list.index(max(changes_list)) 
-    the_greatest_decrease = changes_list.index(min(changes_list))
+    the_greatest_increase = changes_list.index(max(changes)) 
+    the_greatest_decrease = changes_list.index(min(changes))
         
     # the_greatest_increase = max(changes_list)
     # the_greatest_decrease = min(changes_list)
@@ -64,23 +64,20 @@ with open(budget_data) as csv_file:
     print('----------------------------------------')
     print("Total Months:" + " " + str(total_months))
     print("Average Change:" + " " + "str($)" (average_change)
-    print("Greatest Increase in Profits:" + " " + ))
-    print("Greatest Decrease in Profits:" + " " + ))
+    # print("Greatest Increase in Profits:" + " " + ))
+    # print("Greatest Decrease in Profits:" + " " + ))
 
 
 # # Specify the file to write to
 # Analysis = os.path.join( "output", "analysis.csv")
 
 # # Open the file using "write" mode. Specify the variable to hold the contents
-with open(Analysis, 'w') as csv_file:
+# with open(Analysis, 'w') as csvfile:
 
-    #Initialize txt.writter
-    csv_writter = csv.writer (csv_file, delimeter=',')
+#     csv_writter = csv.writer (csvfile, delimeter=',')
 
-#   cvs_writter.writerow(["Financial Analysis"])
-    # cvs_writter.writerow(["Financial Analysis"])
-    # cvs_writter.writerow(["Financial Analysis"])
-    # cvs_writter.writerow(["Financial Analysis"])
+#     cvs_writter.writerow(["Financial Analysis"])
+
 
 # #     file.write("Financial Analysis")
 # #     file.write("----------------------------")
