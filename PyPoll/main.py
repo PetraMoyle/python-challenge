@@ -28,7 +28,7 @@ with open(election_data) as csv_file:
         #rading the candidates in column 3 
         candidate = (row[2])
 
-        #if candidate found in the candidate list, then locate the candidate by index & increment the vote count per candidate by 1     
+        #if candidate found in the candidate list, locate the candidate and increment the vote count per candidate by 1     
         if candidate in candidate_list:   
             candidate_index = candidate_list.index(candidate)
             vote_count_per_candidate[candidate_index] = vote_count_per_candidate[candidate_index] + 1
@@ -49,8 +49,7 @@ with open(election_data) as csv_file:
         #getting the percentage 
         vote_percentage = round((vote_count_per_candidate[i])/total_votes*100,2)
         percentage.append(vote_percentage)
-
-      
+  
     # Finding the maximum votes to determine the election winner
     max_votes = max(vote_count_per_candidate)
     index = vote_count_per_candidate.index(max_votes)   
@@ -66,29 +65,29 @@ with open(election_data) as csv_file:
     print("Total votes" + ":" + " " + str(total_votes)) 
     print("-----------------------------------------------")
     for i in range(len(candidate_list)):
-        print(candidate_list[i] + " " + str(vote_percentage) + " " + str(vote_count_per_candidate[i]))
+        print(candidate_list[i] + " " + str(percentage[i]) + "%" + " " + "(" + str(vote_count_per_candidate[i]) + ")" )
     print("-----------------------------------------------")
     print("Winner" + ":" + " " + (election_winner))  
     print(" ")
 
 
-# Specify the file to write to
-election_results = os.path.join( "output", "election_results.txt")
-
-# Open the file using "write" mode. Specify the variable to hold the contents
-with open(election_results, 'w') as txt_file:
-
-    #Initialize txt.writer
-    txt_writter = txt_writer (txt_file, delimeter=',')
-
-    #writting out the results to a text file 
-    txt_file.write("Election Results\n")
-    txt_file.write("-------------------------------------------------------\n")
-    txt_file.write("Total Votes:" + " " + str(total_votes))
-    txt_file.write("\n")
-    txt_file.write("-------------------------------------------------------\n")
-    txt_file.write("\n")
-    txt_file.write("-------------------------------------------------------\n")
-    txt_file.write("Winner:" + " " + election_winner.upper())
-    txt_file.write("-------------------------------------------------------\n")
-    txt_file.close()
+#Specify the file to write to and initialize txt.writer
+txt_file = open("election_results.txt", "w")
+      
+#writting out the results to a text file 
+txt_file.write("Election Results")
+txt_file.write("\n")
+txt_file.write("-------------------------------------------------------")
+txt_file.write("\n")
+txt_file.write("Total Votes:" + " " + str(total_votes))
+txt_file.write("\n")
+txt_file.write("-------------------------------------------------------")
+txt_file.write("\n")
+for i in range(len(candidate_list)):
+        txt_file.write(candidate_list[i] + " " + str(percentage[i]) + "%" + " " + "(" + str(vote_count_per_candidate[i]) + ")" )
+txt_file.write("\n")
+txt_file.write("-------------------------------------------------------")
+txt_file.write("\n")
+txt_file.write("Winner:" + " " + election_winner.upper())
+txt_file.write("\n")
+txt_file.close()

@@ -62,7 +62,7 @@ with open(budget_data) as csv_file:
     print("Financial Analysis")
     print('----------------------------------------')
     print("Total Months:" + " " + str(total_months))
-    print("Total:" + " " + str(total_net))
+    print("Total:" + " " + "$" + str(total_net))
     print("Average Change:" + " " + "$" + str(average_change))
     print("Greatest Increase in Profits:" + " " + max_month + " " + "(" + "$" + str(the_greatest_increase) + ")")
     print("Greatest Decrease in Profits:" + " " + min_month + " " + "(" + "$" + str(the_greatest_decrease) + ")")
@@ -70,23 +70,22 @@ with open(budget_data) as csv_file:
     print(" ")
 
 
+#Specify the file to write to and initialize txt.writer
+txt_file = open("analysis.txt", "w")    
 
-# Specify the file to write to
-Analysis = os.path.join("Resources", "analysis.txt")
-
-# Open the file using "write" mode. Specify the variable to hold the contents
-with open(Analysis, 'w') as txt_writer:
-
-    # txt_writter = txt_writer (txt_file, delimeter=',')
-
-    txt_writer.write(["Financial Analysis"])
-    txt_writer.write("-------------------------------------------------------\n")
-    txt_writer.write("Total months" + ":" + "" + str(len(total_months)))
-    txt_writer.write("\n")
-    txt_writer.write("Average Change:" + " " + "$" + str(average_change))
-    txt_writer.write("\n")
-    txt_writer.write("Greatest Increase in Profits" + ":" + " " + "$" + max_month + str(the_greatest_increase))
-    txt_writer.write("\n")
-    txt_writer.write("Greatest Decrease in Profits" + ":" + " " + "$" + min_month + str(the_greatest_decrease))
-    txt_writer.write("\n")
+txt_file.write("Financial Analysis")
+txt_file.write("\n")
+txt_file.write("-------------------------------------------------------")
+txt_file.write("\n")
+txt_file.write("Total months:" + " " + str(total_months))
+txt_file.write("\n")
+txt_file.write("Total:" + " " + "$" + str(total_net))
+txt_file.write("\n")
+txt_file.write("Average Change:" + " " + "$" + str(average_change))
+txt_file.write("\n")
+txt_file.write("Greatest Increase in Profits:" + " " + max_month + " " + "(" + "$" + str(the_greatest_increase) + ")" )
+txt_file.write("\n")
+txt_file.write("Greatest Decrease in Profits:" + " " + min_month + " " + "(" + "$" + str(the_greatest_decrease) + ")" )
+txt_file.write("\n")
+txt_file.close()
    
